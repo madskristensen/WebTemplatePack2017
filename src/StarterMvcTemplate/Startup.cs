@@ -14,11 +14,11 @@ namespace StarterMvcTemplate
     {
         public Startup(IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
+            IConfigurationBuilder builder = new ConfigurationBuilder()
+                                  .SetBasePath(env.ContentRootPath)
+                                  .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                                  .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                                  .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
@@ -26,12 +26,12 @@ namespace StarterMvcTemplate
 
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .Build();
+            IWebHost host = new WebHostBuilder()
+                     .UseKestrel()
+                     .UseContentRoot(Directory.GetCurrentDirectory())
+                     .UseIISIntegration()
+                     .UseStartup<Startup>()
+                     .Build();
 
             host.Run();
         }
